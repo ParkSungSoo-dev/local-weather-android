@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WeatherListActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <fragment
+        android:id="@+id/fragment_weather_list"
+        class="dev.soaptree.local.weather.view.WeatherListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <!--dev.soaptree.local.weather.view.WeatherView
+        android:id="@+id/weather_today"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:stateName="Havy Lain"
+        app:temp="37'C"
+        app:humidity="70%"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/weather_tomorrow"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <dev.soaptree.local.weather.view.WeatherView
+        android:id="@+id/weather_tomorrow"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:stateName="Havy Lain"
+        app:temp="37'C"
+        app:humidity="70%"
+        app:layout_constraintLeft_toRightOf="@id/weather_today"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

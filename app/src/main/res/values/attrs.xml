@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Weather">
+        <attr name="stateName" format="string"/>
+        <attr name="stateAbbr" format="string"/>
+        <attr name="temp" format="string"/>
+        <attr name="humidity" format="string"/>
+    </declare-styleable>
+</resources>
