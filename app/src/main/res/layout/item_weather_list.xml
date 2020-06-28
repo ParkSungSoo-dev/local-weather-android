@@ -11,15 +11,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="@dimen/item_weather_list_height"
+        android:background="@drawable/background_item_weather_list">
         <TextView
-            android:id="@+id/textview_title"
+            android:id="@+id/textview_location_title"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@{weather.title}"
-            app:layout_constraintHorizontal_weight="1.5"
+            app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_location"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/weatherview_today"
@@ -33,11 +33,12 @@
             app:stateAbbr="@{weather.todayWeather.weatherStateAbbr}"
             app:temp="@{Utils.temperatureWithSymbol(context, weather.todayWeather.currentTemp)}"
             app:humidity="@{Utils.humidityWithSymbol(context, weather.todayWeather.humidity)}"
-            app:layout_constraintHorizontal_weight="4"
-            app:layout_constraintBottom_toBottomOf="@id/textview_title"
-            app:layout_constraintLeft_toRightOf="@id/textview_title"
+            android:background="@drawable/divider_vertical_weather_list"
+            app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_today"
+            app:layout_constraintBottom_toBottomOf="@id/textview_location_title"
+            app:layout_constraintLeft_toRightOf="@id/textview_location_title"
             app:layout_constraintRight_toLeftOf="@id/weatherview_tomorrow"
-            app:layout_constraintTop_toTopOf="@id/textview_title" />
+            app:layout_constraintTop_toTopOf="@id/textview_location_title" />
 
         <dev.soaptree.local.weather.view.WeatherView
             android:id="@+id/weatherview_tomorrow"
@@ -47,10 +48,11 @@
             app:stateAbbr="@{weather.tomorrowWeather.weatherStateAbbr}"
             app:temp="@{Utils.temperatureWithSymbol(context, weather.tomorrowWeather.currentTemp)}"
             app:humidity="@{Utils.humidityWithSymbol(context, weather.tomorrowWeather.humidity)}"
-            app:layout_constraintHorizontal_weight="4"
-            app:layout_constraintBottom_toBottomOf="@id/textview_title"
+            android:background="@drawable/divider_vertical_weather_list"
+            app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_tomorrow"
+            app:layout_constraintBottom_toBottomOf="@id/textview_location_title"
             app:layout_constraintLeft_toRightOf="@id/weatherview_today"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_title" />
+            app:layout_constraintTop_toTopOf="@id/textview_location_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

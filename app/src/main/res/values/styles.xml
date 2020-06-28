@@ -10,27 +10,31 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="WeatherListTitle" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">@dimen/weather_list_title_font_size</item>
-        <item name="fontFamily"></item>
+    <style name="WeatherListHeaderLocal" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/header_weather_list_font_size</item>
+    </style>
+    <style name="WeatherListHeaderDays" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/header_weather_list_font_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="WeatherStateName" parent="@android:style/Widget.TextView">
+    <style name="WeatherListLocationTitle" parent="@android:style/Widget.TextView">
         <item name="android:textSize">@dimen/weather_list_title_font_size</item>
-        <item name="fontFamily"></item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="WeatherState" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/weather_state_name_font_size</item>
     </style>
 
     <style name="WeatherTemp" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">@dimen/weather_list_title_font_size</item>
-        <item name="fontFamily"></item>
+        <item name="android:textSize">@dimen/weather_temp_font_size</item>
+        <item name="android:textColor">@color/colorTemp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="WeatherHumidity" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">@dimen/weather_list_title_font_size</item>
-        <item name="fontFamily"></item>
+        <item name="android:textSize">@dimen/weather_humidity_font_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 

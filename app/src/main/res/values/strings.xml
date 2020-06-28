@@ -3,4 +3,8 @@
     <string name="weather_list_title">Local Weather</string>
     <string name="format_temp">%.0f℃</string>
     <string name="format_humidity">%.0f%%</string>
+
+    <string name="header_weather_list_location_title">Local</string>
+    <string name="header_weather_list_today">Today</string>
+    <string name="header_weather_list_tomorrow">Tomorrow</string>
 </resources>
