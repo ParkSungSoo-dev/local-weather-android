@@ -1,7 +1,6 @@
-package dev.soaptree.local.weather
+package dev.soaptree.local.weather.data
 
 import com.google.gson.annotations.SerializedName
-import dev.soaptree.local.weather.util.Utils
 import java.util.*
 
 data class Weather(
@@ -10,7 +9,7 @@ data class Weather(
     @SerializedName("location_type")
     val locationType: String,
     @SerializedName("latt_long")
-    private var lattLong: String?,
+    val lattLong: String,
     @SerializedName("time")
     val time: Date,
     @SerializedName("sun_rise")

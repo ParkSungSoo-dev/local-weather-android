@@ -6,7 +6,7 @@
         <import type="dev.soaptree.local.weather.util.Utils"/>
         <variable
             name="weather"
-            type="dev.soaptree.local.weather.Weather" />
+            type="dev.soaptree.local.weather.data.Weather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             app:layout_constraintRight_toLeftOf="@id/weatherview_today"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <dev.soaptree.local.weather.view.WeatherView
+        <dev.soaptree.local.weather.ui.WeatherView
             android:id="@+id/weatherview_today"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -40,7 +40,7 @@
             app:layout_constraintRight_toLeftOf="@id/weatherview_tomorrow"
             app:layout_constraintTop_toTopOf="@id/textview_location_title" />
 
-        <dev.soaptree.local.weather.view.WeatherView
+        <dev.soaptree.local.weather.ui.WeatherView
             android:id="@+id/weatherview_tomorrow"
             android:layout_width="0dp"
             android:layout_height="0dp"

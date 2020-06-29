@@ -1,25 +1,27 @@
-package dev.soaptree.local.weather.view
+package dev.soaptree.local.weather.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.soaptree.local.weather.R
-import dev.soaptree.local.weather.Weather
+import dev.soaptree.local.weather.data.Weather
 import dev.soaptree.local.weather.databinding.ItemWeatherListBinding
 
 class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val VIEW_HOLDER_TYPE_HEADER = 0
-    private val VIEW_HOLDER_TYPE_ITEM = 1
+    companion object {
+        private const val VIEW_HOLDER_TYPE_HEADER = 0
+        private const val VIEW_HOLDER_TYPE_ITEM = 1
 
-    private val HEADER_COUNT = 1
+        private const val HEADER_COUNT: Int = 1
+    }
 
     var weathers: ArrayList<Weather> = ArrayList()
-    set(value) {
-        weathers.clear()
-        weathers.addAll(value)
-        notifyDataSetChanged()
-    }
+        set(value) {
+            weathers.clear()
+            weathers.addAll(value)
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

@@ -6,6 +6,7 @@ import dev.soaptree.local.weather.R
 class Utils {
 
     companion object {
+        @JvmStatic
         fun parseDouble(srcText: String?, separator: String, index: Int): Double? {
             srcText?.let { srcTextNotNull ->
                 val srcTextSplit = srcTextNotNull.split(separator.toRegex())
