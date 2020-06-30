@@ -2,8 +2,8 @@ package dev.soaptree.local.weather.data.remote
 
 import com.google.gson.GsonBuilder
 import dev.soaptree.local.weather.BuildConfig
-import dev.soaptree.local.weather.data.Weather
-import dev.soaptree.local.weather.data.Location
+import dev.soaptree.local.weather.data.LocationWeather
+import dev.soaptree.local.weather.data.LocationSearched
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,16 +14,16 @@ import java.text.DateFormat
 
 interface WeatherApiService {
     @GET("location/search")
-    suspend fun getLocationSearchAsync(
+    suspend fun getLocationSearchedList(
         @Query("query")
         locationName: String
-    ) : Response<List<Location>>
+    ) : Response<List<LocationSearched>>
 
     @GET("location/{woeid}")
-    suspend fun getLocationWeatherAsync(
+    suspend fun getLocationWeather(
         @Path("woeid")
         whereOnEarthId: Int
-    ) : Response<Weather>
+    ) : Response<LocationWeather>
 
     companion object Factory {
         private val retrofit: Retrofit by lazy {

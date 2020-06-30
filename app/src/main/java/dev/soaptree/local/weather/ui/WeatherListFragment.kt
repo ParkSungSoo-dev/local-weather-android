@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import dev.soaptree.local.weather.R
-import dev.soaptree.local.weather.data.Weather
+import dev.soaptree.local.weather.data.LocationWeather
 import dev.soaptree.local.weather.databinding.FragmentWeatherListBinding
 import kotlinx.android.synthetic.main.fragment_weather_list.*
 
@@ -19,11 +19,11 @@ class WeatherListFragment : Fragment() {
     companion object {
         @JvmStatic
         @BindingAdapter("listData")
-        fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<Weather>?) {
+        fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<LocationWeather>?) {
             data?.let {
                 val adapter = recyclerView.adapter
                 if (adapter is WeatherListAdapter) {
-                    adapter.weathers = it
+                    adapter.locationWeathers = it
                 }
             }
         }
@@ -54,7 +54,7 @@ class WeatherListFragment : Fragment() {
         }
 
         swiperefreshlayout_location_weather.setOnRefreshListener {
-            locationWeatherViewModel.refreshWeathers { swiperefreshlayout_location_weather.isRefreshing = false }
+            locationWeatherViewModel.refreshLocationWeathers { swiperefreshlayout_location_weather.isRefreshing = false }
         }
     }
 

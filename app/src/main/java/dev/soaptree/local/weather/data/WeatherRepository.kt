@@ -8,35 +8,36 @@ import java.lang.RuntimeException
 object WeatherRepository {
     private val weatherApiService = WeatherApiService.create()
 
-    suspend fun getWeathers(coroutineScope: CoroutineScope, locations: List<Location>?) : ArrayList<Weather> {
-        val newWeathers: ArrayList<Weather> = ArrayList()
-        val weatherResponseList = ArrayList<Deferred<Response<Weather>>>()
-        coroutineScope.launch {
-            locations?.forEach { location ->
-                val weatherDeferred = coroutineScope.async(Dispatchers.IO) {
-                    weatherApiService.getLocationWeatherAsync(location.whereOnEarthId)
-                }
-                weatherResponseList.add(weatherDeferred)
-            }
-            weatherResponseList.forEach{ weatherDeferredResponse ->
-                val weatherResponse = weatherDeferredResponse.await()
-                if (!weatherResponse.isSuccessful) {
-                    throw RuntimeException("Failed to request weather. code: ${weatherResponse.code()}, message: ${weatherResponse.message()}")
-                }
-                weatherResponse.body()?.let { newWeathers.add(it) }
-            }
-        }.join()
-        return newWeathers
-    }
-    suspend fun getLocation(coroutineScope: CoroutineScope, location: String) : List<Location>? {
-        var newLocations: List<Location>? = null
+    suspend fun getLocationSearchedList(coroutineScope: CoroutineScope, location: String) : List<LocationSearched>? {
+        var newLocationSearchedList: List<LocationSearched>? = null
         coroutineScope.launch(Dispatchers.IO) {
-            val locationsResponse = weatherApiService.getLocationSearchAsync(location)
+            val locationsResponse = weatherApiService.getLocationSearchedList(location)
             if (!locationsResponse.isSuccessful) {
                 throw RuntimeException("Failed to request locations. code: ${locationsResponse.code()}, message: ${locationsResponse.message()}")
             }
-            newLocations = locationsResponse.body()
+            newLocationSearchedList = locationsResponse.body()
         }.join()
-        return newLocations
+        return newLocationSearchedList
+    }
+
+    suspend fun getLocationWeathers(coroutineScope: CoroutineScope, locationSearchedList: List<LocationSearched>?) : ArrayList<LocationWeather> {
+        val newLocationWeathers: ArrayList<LocationWeather> = ArrayList()
+        val locationWeatherDeferredResponseList = ArrayList<Deferred<Response<LocationWeather>>>()
+        coroutineScope.launch {
+            locationSearchedList?.forEach { location ->
+                val weatherDeferred = coroutineScope.async(Dispatchers.IO) {
+                    weatherApiService.getLocationWeather(location.whereOnEarthId)
+                }
+                locationWeatherDeferredResponseList.add(weatherDeferred)
+            }
+            locationWeatherDeferredResponseList.forEach{ weatherDeferredResponse ->
+                val weatherResponse = weatherDeferredResponse.await()
+                if (!weatherResponse.isSuccessful) {
+                    throw RuntimeException("Failed to getLocationWeather. code: ${weatherResponse.code()}, message: ${weatherResponse.message()}")
+                }
+                weatherResponse.body()?.let { newLocationWeathers.add(it) }
+            }
+        }.join()
+        return newLocationWeathers
     }
 }

@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listview_location_weather"
-                listData="@{locationWeatherViewModel.weathers}"
+                listData="@{locationWeatherViewModel.locationWeathers}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -57,7 +57,7 @@
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{locationWeatherViewModel.isInitWeathers() ? View.VISIBLE : View.GONE}"
+            android:visibility="@{locationWeatherViewModel.isInitData() ? View.VISIBLE : View.GONE}"
             app:constraint_referenced_ids="view_progress_weather_background, progress_weather_loading"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

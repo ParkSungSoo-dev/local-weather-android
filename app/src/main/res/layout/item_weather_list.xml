@@ -5,8 +5,8 @@
     <data>
         <import type="dev.soaptree.local.weather.util.Utils"/>
         <variable
-            name="weather"
-            type="dev.soaptree.local.weather.data.Weather" />
+            name="locationWeather"
+            type="dev.soaptree.local.weather.data.LocationWeather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@{weather.title}"
+            android:text="@{locationWeather.title}"
             app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_location"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -29,10 +29,10 @@
             android:id="@+id/weatherview_today"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:stateName="@{weather.todayWeather.weatherStateName}"
-            app:stateAbbr="@{weather.todayWeather.weatherStateAbbr}"
-            app:temp="@{Utils.temperatureWithSymbol(context, weather.todayWeather.currentTemp)}"
-            app:humidity="@{Utils.humidityWithSymbol(context, weather.todayWeather.humidity)}"
+            app:stateName="@{locationWeather.todayWeather.weatherStateName}"
+            app:stateAbbr="@{locationWeather.todayWeather.weatherStateAbbr}"
+            app:temp="@{Utils.temperatureWithSymbol(context, locationWeather.todayWeather.currentTemp)}"
+            app:humidity="@{Utils.humidityWithSymbol(context, locationWeather.todayWeather.humidity)}"
             android:background="@drawable/divider_vertical_weather_list"
             app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_today"
             app:layout_constraintBottom_toBottomOf="@id/textview_location_title"
@@ -44,10 +44,10 @@
             android:id="@+id/weatherview_tomorrow"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:stateName="@{weather.tomorrowWeather.weatherStateName}"
-            app:stateAbbr="@{weather.tomorrowWeather.weatherStateAbbr}"
-            app:temp="@{Utils.temperatureWithSymbol(context, weather.tomorrowWeather.currentTemp)}"
-            app:humidity="@{Utils.humidityWithSymbol(context, weather.tomorrowWeather.humidity)}"
+            app:stateName="@{locationWeather.tomorrowWeather.weatherStateName}"
+            app:stateAbbr="@{locationWeather.tomorrowWeather.weatherStateAbbr}"
+            app:temp="@{Utils.temperatureWithSymbol(context, locationWeather.tomorrowWeather.currentTemp)}"
+            app:humidity="@{Utils.humidityWithSymbol(context, locationWeather.tomorrowWeather.humidity)}"
             android:background="@drawable/divider_vertical_weather_list"
             app:layout_constraintHorizontal_weight="@integer/weather_list_horizontal_weight_tomorrow"
             app:layout_constraintBottom_toBottomOf="@id/textview_location_title"

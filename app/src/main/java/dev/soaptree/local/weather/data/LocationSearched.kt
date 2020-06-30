@@ -3,7 +3,7 @@ package dev.soaptree.local.weather.data
 import com.google.gson.annotations.SerializedName
 import dev.soaptree.local.weather.util.Utils
 
-data class Location(
+data class LocationSearched(
     @SerializedName("title")
     val title: String,
     @SerializedName("location_type")

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.soaptree.local.weather.R
-import dev.soaptree.local.weather.data.Weather
+import dev.soaptree.local.weather.data.LocationWeather
 import dev.soaptree.local.weather.databinding.ItemWeatherListBinding
 
 class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -16,10 +16,10 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private const val HEADER_COUNT: Int = 1
     }
 
-    var weathers: ArrayList<Weather> = ArrayList()
+    var locationWeathers: ArrayList<LocationWeather> = ArrayList()
         set(value) {
-            weathers.clear()
-            weathers.addAll(value)
+            locationWeathers.clear()
+            locationWeathers.addAll(value)
             notifyDataSetChanged()
         }
 
@@ -41,7 +41,7 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        var weathersCount = weathers.size
+        var weathersCount = locationWeathers.size
         if (weathersCount != 0) {
             weathersCount += HEADER_COUNT
         }
@@ -51,8 +51,8 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is WeatherListItemViewHolder -> {
-                val weather = weathers[position - HEADER_COUNT]
-                holder.bind(weather)
+                val locationWeather = locationWeathers[position - HEADER_COUNT]
+                holder.bind(locationWeather)
             }
         }
     }
@@ -61,10 +61,9 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class WeatherListItemViewHolder(private var itemWeatherListBinding: ItemWeatherListBinding) :
         RecyclerView.ViewHolder (itemWeatherListBinding.root) {
-        fun bind(weather: Weather) {
-            itemWeatherListBinding.weather = weather
+        fun bind(locationWeather: LocationWeather) {
+            itemWeatherListBinding.locationWeather = locationWeather
             itemWeatherListBinding.executePendingBindings()
         }
     }
-
 }

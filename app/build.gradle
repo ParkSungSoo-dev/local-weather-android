@@ -21,6 +21,8 @@ android {
 
         buildConfigField("String", "WEATHER_SERVER_BASE_URL", WEATHER_SERVER_BASE_URL)
         buildConfigField("String", "WEATHER_IMAGE_URL_FORMAT", WEATHER_IMAGE_URL_FORMAT)
+
+        archivesBaseName = "LocalWeather_Ver$versionName($versionCode)_${new Date().format("yyyyMMdd_HHmmss")}"
     }
     buildFeatures {
         dataBinding true

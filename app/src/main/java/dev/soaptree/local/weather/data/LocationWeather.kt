@@ -3,7 +3,7 @@ package dev.soaptree.local.weather.data
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class Weather(
+data class LocationWeather(
     @SerializedName("title")
     val title: String,
     @SerializedName("location_type")
@@ -17,13 +17,13 @@ data class Weather(
     @SerializedName("sun_set")
     val sunSetTime: Date,
     @SerializedName("parent")
-    val parent: Location,
+    val parent: LocationSearched,
     @SerializedName("consolidated_weather")
-    val consolidatedWeathers: List<ConsolidatedWeather>,
+    val weathers: List<Weather>,
     @SerializedName("sources")
     val soruces: List<Source>
 ) {
-    data class ConsolidatedWeather (
+    data class Weather (
         @SerializedName("id")
         val id: Long,
         @SerializedName("applicable_date")
@@ -61,18 +61,18 @@ data class Weather(
         val url: String
     )
 
-    val todayWeather: ConsolidatedWeather?
+    val todayWeather: Weather?
     get() {
-        return if (consolidatedWeathers.isNotEmpty()) {
-            consolidatedWeathers[0]
+        return if (weathers.isNotEmpty()) {
+            weathers[0]
         } else {
             null
         }
     }
-    val tomorrowWeather: ConsolidatedWeather?
+    val tomorrowWeather: Weather?
         get() {
-            return if (consolidatedWeathers.size >= 2) {
-                consolidatedWeathers[1]
+            return if (weathers.size >= 2) {
+                weathers[1]
             } else {
                 null
             }
