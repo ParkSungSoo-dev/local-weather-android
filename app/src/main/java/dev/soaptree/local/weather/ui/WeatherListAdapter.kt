@@ -62,8 +62,10 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class WeatherListItemViewHolder(private var itemWeatherListBinding: ItemWeatherListBinding) :
         RecyclerView.ViewHolder (itemWeatherListBinding.root) {
         fun bind(locationWeather: LocationWeather) {
-            itemWeatherListBinding.locationWeather = locationWeather
-            itemWeatherListBinding.executePendingBindings()
+            itemWeatherListBinding.apply {
+                this.locationWeather = locationWeather
+                executePendingBindings()
+            }
         }
     }
 }

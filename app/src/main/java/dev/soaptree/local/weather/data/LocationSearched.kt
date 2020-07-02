@@ -13,12 +13,6 @@ data class LocationSearched(
     @SerializedName("latt_long")
     private val lattLong: String?
 ) {
-    companion object {
-        private const val LATT_LONG_SEPARATOR_REGEX = ","
-        private const val INDEX_OF_LATITUDE = 0
-        private const val INDEX_OF_LONGITUDE = 1
-    }
-
     val latitude: Double
         get() {
             Utils.parseDouble(lattLong, LATT_LONG_SEPARATOR_REGEX, INDEX_OF_LATITUDE)?.let {
@@ -33,4 +27,10 @@ data class LocationSearched(
             }
             return -1.0
         }
+
+    companion object {
+        private const val LATT_LONG_SEPARATOR_REGEX = ","
+        private const val INDEX_OF_LATITUDE = 0
+        private const val INDEX_OF_LONGITUDE = 1
+    }
 }
