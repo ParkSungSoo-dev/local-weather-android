@@ -16,19 +16,6 @@ import kotlinx.android.synthetic.main.fragment_weather_list.*
 
 class WeatherListFragment : Fragment() {
 
-    companion object {
-        @JvmStatic
-        @BindingAdapter("listData")
-        fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<LocationWeather>?) {
-            data?.let {
-                val adapter = recyclerView.adapter
-                if (adapter is WeatherListAdapter) {
-                    adapter.locationWeathers = it
-                }
-            }
-        }
-    }
-
     private val locationWeatherViewModel  by lazy {
         ViewModelProvider(viewModelStore, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(
             LocationWeatherViewModel::class.java
@@ -48,12 +35,12 @@ class WeatherListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listview_location_weather.apply {
+        listview_location_weather?.run {
             adapter = WeatherListAdapter()
             setHasFixedSize(true)
         }
 
-        swiperefreshlayout_location_weather.setOnRefreshListener {
+        swiperefreshlayout_location_weather?.setOnRefreshListener {
             locationWeatherViewModel.refreshLocationWeathers { swiperefreshlayout_location_weather.isRefreshing = false }
         }
     }
@@ -61,5 +48,19 @@ class WeatherListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         locationWeatherViewModel.searchLocationWeathers("se")
+    }
+
+    object WeatherListBindingAdapter {
+        @JvmStatic
+        @BindingAdapter("listData")
+        fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<LocationWeather>?) {
+            data?.let { newLocationsWeather ->
+                recyclerView.adapter?.let { adapter ->
+                    if (adapter is WeatherListAdapter) {
+                        adapter.locationWeathers = newLocationsWeather
+                    }
+                }
+            }
+        }
     }
 }

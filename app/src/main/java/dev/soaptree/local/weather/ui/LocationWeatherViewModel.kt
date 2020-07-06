@@ -32,33 +32,49 @@ class LocationWeatherViewModel(application: Application) : AndroidViewModel(appl
     fun searchLocationWeathers(location: String) {
         _isInitData.value = true
         clearLocationWeathers()
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                WeatherRepository.getLocationSearchedList(viewModelScope, location)?.let { newLocations ->
-                    withContext(Dispatchers.Main) { locationSearchedList.value = newLocations }
-                    WeatherRepository.getLocationWeathers(viewModelScope, newLocations).let { newWeathers ->
-                        withContext(Dispatchers.Main) { _locationWeathers.value = newWeathers }
-                    }
+        val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            Log.e("dev.soaptree.local.weather", "searchLocationWeathers", throwable)
+            viewModelScope.launch(Dispatchers.Main) {
+                Toast.makeText(
+                    getApplication(),
+                    "Failed to searchLocationWeathers",
+                    Toast.LENGTH_LONG
+                ).show()
+                _isInitData.value = false
+            }
+        }
+        val scope = CoroutineScope(viewModelScope.coroutineContext + exceptionHandler)
+        scope.launch(Dispatchers.IO) {
+            WeatherRepository.getLocationSearchedList(scope, location)?.let { newLocations ->
+                withContext(Dispatchers.Main) {
+                    locationSearchedList.value = newLocations
                 }
-            } catch (e: Exception) {
-                Log.e("dev.soaptree.local.weather", "searchLocationWeathers", e)
-                withContext(Dispatchers.Main) { Toast.makeText(getApplication(), "Failed to searchLocationWeathers", Toast.LENGTH_LONG).show() }
-            } finally {
-                withContext(Dispatchers.Main) { _isInitData.value = false }
+            }
+            WeatherRepository.getLocationWeathers(scope, locationSearchedList.value).let { newWeathers ->
+                withContext(Dispatchers.Main) {
+                    _locationWeathers.value = newWeathers
+                }
+            }
+            withContext(Dispatchers.Main) {
+                _isInitData.value = false
             }
         }
     }
     fun refreshLocationWeathers(onRefreshFinished:() -> Unit) {
         clearLocationWeathers()
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val newWeathers = WeatherRepository.getLocationWeathers(viewModelScope, locationSearchedList.value)
-                withContext(Dispatchers.Main) { _locationWeathers.value = newWeathers }
-            } catch (e: Exception) {
-                Log.e("dev.soaptree.local.weather", "refreshWeathers", e)
-                withContext(Dispatchers.Main) { Toast.makeText(getApplication(), "Failed to refreshWeathers", Toast.LENGTH_LONG).show() }
-            } finally {
-                withContext(Dispatchers.Main) { onRefreshFinished() }
+        val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            Log.e("dev.soaptree.local.weather", "refreshLocationWeathers", throwable)
+            viewModelScope.launch(Dispatchers.Main) {
+                Toast.makeText(getApplication(), "Failed to refreshWeathers", Toast.LENGTH_LONG).show()
+                onRefreshFinished()
+            }
+        }
+        val scope = CoroutineScope(viewModelScope.coroutineContext + exceptionHandler)
+        scope.launch(Dispatchers.IO) {
+            val newWeathers = WeatherRepository.getLocationWeathers(scope, locationSearchedList.value)
+            withContext(Dispatchers.Main) {
+                _locationWeathers.value = newWeathers
+                onRefreshFinished()
             }
         }
     }

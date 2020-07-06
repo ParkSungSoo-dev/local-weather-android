@@ -9,13 +9,6 @@ import dev.soaptree.local.weather.data.LocationWeather
 import dev.soaptree.local.weather.databinding.ItemWeatherListBinding
 
 class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    companion object {
-        private const val VIEW_HOLDER_TYPE_HEADER = 0
-        private const val VIEW_HOLDER_TYPE_ITEM = 1
-
-        private const val HEADER_COUNT: Int = 1
-    }
-
     var locationWeathers: ArrayList<LocationWeather> = ArrayList()
         set(value) {
             locationWeathers.clear()
@@ -61,11 +54,18 @@ class WeatherListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class WeatherListItemViewHolder(private var itemWeatherListBinding: ItemWeatherListBinding) :
         RecyclerView.ViewHolder (itemWeatherListBinding.root) {
-        fun bind(locationWeather: LocationWeather) {
-            itemWeatherListBinding.apply {
-                this.locationWeather = locationWeather
+        fun bind(currentLocationWeather: LocationWeather) {
+            itemWeatherListBinding.run {
+                locationWeather = currentLocationWeather
                 executePendingBindings()
             }
         }
+    }
+
+    companion object {
+        private const val VIEW_HOLDER_TYPE_HEADER = 0
+        private const val VIEW_HOLDER_TYPE_ITEM = 1
+
+        private const val HEADER_COUNT: Int = 1
     }
 }

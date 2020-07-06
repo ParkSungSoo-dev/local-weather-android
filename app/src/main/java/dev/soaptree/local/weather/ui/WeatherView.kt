@@ -20,7 +20,9 @@ class WeatherView @JvmOverloads constructor(
         attrs?.let { attributeSet ->
             context.obtainStyledAttributes(attributeSet, R.styleable.WeatherView, 0, 0).apply {
                 getString(R.styleable.WeatherView_stateName)?.let { textview_weather_state.text = it }
-                getString(R.styleable.WeatherView_stateAbbr)?.let { Glide.with(this@WeatherView).load(getWeatherImageUrl(it)).into(imageview_weather_state) }
+                getString(R.styleable.WeatherView_stateAbbr)?.let {
+                    Glide.with(this@WeatherView).load(getWeatherImageUrl(it)).into(imageview_weather_state)
+                }
                 getString(R.styleable.WeatherView_temp)?.let { textview_temp.text = it}
                 getString(R.styleable.WeatherView_humidity)?.let {  textview_humidity.text = it }
                 recycle()
@@ -28,7 +30,7 @@ class WeatherView @JvmOverloads constructor(
         }
     }
 
-    companion object {
+    object WeatherViewBindingAdapter {
         @JvmStatic
         @BindingAdapter("stateName")
         fun bindStateName(weatherView: WeatherView, stateName: String) {
@@ -52,7 +54,9 @@ class WeatherView @JvmOverloads constructor(
         fun bindHumidity(weatherView: WeatherView, humidity: String) {
             weatherView.textview_humidity.text = humidity
         }
+    }
 
+    companion object {
         @JvmStatic
         fun getWeatherImageUrl(weatherStateAbbr: String) : String {
             return BuildConfig.WEATHER_IMAGE_URL_FORMAT.format(weatherStateAbbr)
